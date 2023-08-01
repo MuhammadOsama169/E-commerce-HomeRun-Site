@@ -5,9 +5,9 @@ import Provider from './components/AuthProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Travel Guide',
+  title: 'HomeRun',
   description:
-    'Unlock a World of Inspiration with Handcrafted Destination Guides by Your Favorite Creators.',
+    'Unleash boundless wanderlust with handcrafted destination guides by beloved creators on our enchanting e-commerce site.',
 };
 
 export default function RootLayout({
