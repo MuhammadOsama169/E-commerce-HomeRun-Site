@@ -16,21 +16,17 @@ export const ProductSkeleton = ({
   image,
 }: ProductProps) => {
   return (
-    <main className="mx-auto  rounded bg-slate-300">
-      <div className="p-5 grid grid-cols-3 ">
-        <div className="">
-          <Image
-            alt="gallery"
-            src={image}
-            width="0"
-            height="0"
-            sizes="100vw"
-            className="w-[300px] h-[200px] rounded-md  "
-          />
-        </div>
-        <h1>{title}</h1>
-        <h1>{price}</h1>
-      </div>
+    <main className="flex flex-col text-center mx-auto">
+      <Image
+        alt="gallery"
+        src={image}
+        width="0"
+        height="0"
+        sizes="100vw"
+        className="w-full h-[300px] rounded-md flex justify-center items-center "
+      />
+      <h1>{title}</h1>
+      <h1>{price}</h1>
     </main>
   );
 };

@@ -18,7 +18,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full sm:flex hidden mt-5 items-center lg:text-lg ">
+      <nav className="w-full sm:flex hidden mt-5 items-center lg:text-lg text-white">
         {/* // Desktop view */}
         <div className="flex md:justify-start justify-center items-center md:ml-10 mx-auto">
           <Link href={'/'}>

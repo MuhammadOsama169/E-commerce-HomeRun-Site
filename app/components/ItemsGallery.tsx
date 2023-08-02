@@ -25,18 +25,20 @@ export default async function ItemsGallery(): Promise<JSX.Element> {
     const products: ProductProps[] = await getProductsData();
 
     return (
-      <main>
-        {products.map((product, i) => (
-          <div key={i}>
-            <ProductSkeleton
-              title={product.title}
-              description={product.description}
-              image={product.image}
-              price={product.price}
-              category={product.category}
-            />
-          </div>
-        ))}
+      <main className="flex justify-center mx-auto mt-10 max-w-[1080px] text-white">
+        <div className="grid grid-cols-4 gap-[50px] ">
+          {products.map((product, i) => (
+            <div key={i} className="">
+              <ProductSkeleton
+                title={product.title}
+                description={product.description}
+                image={product.image}
+                price={product.price}
+                category={product.category}
+              />
+            </div>
+          ))}
+        </div>
       </main>
     );
   } catch (error) {
