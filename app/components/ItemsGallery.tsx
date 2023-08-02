@@ -19,17 +19,19 @@ interface ProductProps {
   image: string;
   price: number;
   category: string;
+  id: string;
 }
 export default async function ItemsGallery(): Promise<JSX.Element> {
   try {
     const products: ProductProps[] = await getProductsData();
 
     return (
-      <main className="flex justify-center mx-auto mt-10 max-w-[1080px] text-white">
+      <main className="flex justify-center mx-auto mt-10 max-w-[1080px] text-white ">
         <div className="grid grid-cols-4 gap-[50px] ">
           {products.map((product, i) => (
-            <div key={i} className="">
+            <div key={i}>
               <ProductSkeleton
+                id={product.id}
                 title={product.title}
                 description={product.description}
                 image={product.image}
