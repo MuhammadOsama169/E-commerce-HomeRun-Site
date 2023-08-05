@@ -5,9 +5,10 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 
 const getProductsData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
-    cache: 'no-store',
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
+    {}
+  );
 
   if (!res.ok) {
     throw new Error(`Failed to fetch product data. Status: ${res.status}`);
@@ -25,6 +26,8 @@ interface ProductProps {
   category: string;
   id: string;
 }
+const buttonStyles =
+  'text-white hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2';
 
 const ProductDetails = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
@@ -73,8 +76,16 @@ const ProductDetails = () => {
         <p className="text-md font-light mt-10 ">
           {selectedProduct.description}
         </p>
-        <div className="mt-10 flex ">
-          <button className="bg-[#2B4CD7] text-white p-5 rounded-lg hover:scale-[0.98]">
+        <div className="mt-10 flex flex-col">
+          <h2>Size</h2>
+          <div className="flex gap-2 my-5">
+            <button className={buttonStyles}>XL</button>
+            <button className={buttonStyles}>L</button>
+            <button className={buttonStyles}>M</button>
+            <button className={buttonStyles}>S</button>
+          </div>
+
+          <button className="bg-[#2B4CD7] text-white p-5 rounded-lg hover:scale-[0.98] hover:focus:ring-2 focus:ring-blue-300">
             Add To Cart
           </button>
         </div>

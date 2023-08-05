@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { addToCart, removeFromCart } from '../store/state/cartSlice';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 interface ProductProps {
   title: string;
@@ -9,6 +12,7 @@ interface ProductProps {
   price: number;
   category: string;
   id: string;
+  product: any;
 }
 
 export const ProductSkeleton = ({
@@ -17,7 +21,13 @@ export const ProductSkeleton = ({
   price,
   image,
   id,
+  product,
 }: ProductProps) => {
+  const dispatch = useDispatch();
+  const item = useSelector((state) => state.cart.cart);
+  const addedItem = useSelector((state) => state.cart);
+  const [count, setCount] = useState(1);
+  console.log(item);
   return (
     <main className="flex flex-col text-center mx-auto ">
       <Link href={`./${id}`}>
@@ -35,9 +45,10 @@ export const ProductSkeleton = ({
       <section className="flex mt-2 ">
         <div className="flex justify-start mx-auto">
           <h1 className=" font-Montserrat text-md bg-[#880808] rounded w-[100px] p-2">
-            {price}
+            ${price}
           </h1>
         </div>
+
         <div className="flex justify-end mx-auto items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +57,7 @@ export const ProductSkeleton = ({
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-8 h-8 hover:scale-[1.2]"
+            onClick={() => dispatch(addToCart({ item: { ...product, count } }))}
           >
             <path
               strokeLinecap="round"
@@ -53,6 +65,7 @@ export const ProductSkeleton = ({
               d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -60,6 +73,7 @@ export const ProductSkeleton = ({
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-8 h-8 hover:scale-[1.2]"
+            onClick={() => dispatch(removeFromCart({ id: product.id }))}
           >
             <path
               strokeLinecap="round"
