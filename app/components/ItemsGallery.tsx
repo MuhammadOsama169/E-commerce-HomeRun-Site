@@ -1,15 +1,22 @@
+import { setItems } from '../store/state/cartSlice';
 import { ProductSkeleton } from './ProductSkeleton';
+import { useDispatch } from 'react-redux';
 
 const getProductsData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
-    cache: 'no-store',
-  });
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const dispatch = useDispatch();
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
+    {}
+  );
 
   if (!res.ok) {
     throw new Error(`Failed to fetch post data. Status: ${res.status}`);
   }
 
   const data = await res.json();
+  dispatch(setItems(data));
   return data;
 };
 
@@ -22,6 +29,8 @@ interface ProductProps {
   id: string;
 }
 export default async function ItemsGallery(): Promise<JSX.Element> {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+
   try {
     const products: ProductProps[] = await getProductsData();
 
@@ -37,6 +46,7 @@ export default async function ItemsGallery(): Promise<JSX.Element> {
                 image={product.image}
                 price={product.price}
                 category={product.category}
+                product={product}
               />
             </div>
           ))}

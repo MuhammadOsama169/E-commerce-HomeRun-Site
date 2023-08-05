@@ -1,8 +1,10 @@
 import { Navbar } from './components/layout/Navbar';
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Provider from './components/AuthProvider';
+import ProviderAuth from './components/AuthProvider';
 const inter = Inter({ subsets: ['latin'] });
+import { store } from '../app/store/index';
+import { Provider } from 'react-redux';
 
 export const metadata = {
   title: 'HomeRun',
@@ -18,10 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <Provider>
+        <ProviderAuth>
           <Navbar />
           {children}
-        </Provider>
+        </ProviderAuth>
       </body>
     </html>
   );
