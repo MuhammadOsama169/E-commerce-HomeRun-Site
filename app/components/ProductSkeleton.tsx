@@ -1,9 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { addToCart, removeFromCart } from '../store/state/cartSlice';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import React from 'react';
 
 interface ProductProps {
   title: string;
@@ -13,6 +10,8 @@ interface ProductProps {
   category: string;
   id: string;
   product: any;
+  setModal: boolean;
+  isModalOpen: boolean;
 }
 
 export const ProductSkeleton = ({
@@ -23,66 +22,47 @@ export const ProductSkeleton = ({
   id,
   product,
 }: ProductProps) => {
-  const dispatch = useDispatch();
-  const item = useSelector((state) => state.cart.cart);
-  const addedItem = useSelector((state) => state.cart);
-  const [count, setCount] = useState(1);
-  console.log(item);
   return (
-    <main className="flex flex-col text-center mx-auto ">
-      <Link href={`./${id}`}>
-        <Image
-          alt="gallery"
-          src={image}
-          width="0"
-          height="0"
-          sizes="100vw"
-          className="w-full h-[300px] rounded-md flex justify-center items-center hover:scale-[0.98] "
-        />
-      </Link>
+    <>
+      <main className="flex flex-col text-center mx-auto ">
+        <Link href={`./${id}`}>
+          <Image
+            alt="gallery"
+            src={image}
+            width="0"
+            height="0"
+            sizes="100vw"
+            className="w-full h-[300px] rounded-md flex justify-center items-center hover:scale-[0.98] "
+          />
+        </Link>
 
-      <h1 className="font-Montserrat text-lg mt-5 ">{title}</h1>
-      <section className="flex mt-2 ">
-        <div className="flex justify-start mx-auto">
-          <h1 className=" font-Montserrat text-md bg-[#880808] rounded w-[100px] p-2">
-            ${price}
-          </h1>
-        </div>
+        <h1 className="font-Montserrat text-lg mt-5 ">{title}</h1>
+        <section className="flex mt-2 ">
+          <div className="flex justify-start mx-auto">
+            <h1 className=" font-Montserrat text-md bg-[#880808] rounded w-[100px] p-2">
+              ${price}
+            </h1>
+          </div>
 
-        <div className="flex justify-end mx-auto items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8 hover:scale-[1.2]"
-            onClick={() => dispatch(addToCart({ item: { ...product, count } }))}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-8 h-8 hover:scale-[1.2]"
-            onClick={() => dispatch(removeFromCart({ id: product.id }))}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </div>
-      </section>
-    </main>
+          <div className="flex justify-end mx-auto items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="red"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="red"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+              />
+            </svg>
+            {Math.floor(Math.random() * 10)} Reviews
+          </div>
+        </section>
+      </main>
+    </>
   );
 };

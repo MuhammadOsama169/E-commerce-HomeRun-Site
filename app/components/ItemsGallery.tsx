@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { setItems } from '../store/state/cartSlice';
 import { ProductSkeleton } from './ProductSkeleton';
 import { useDispatch } from 'react-redux';
@@ -28,14 +29,12 @@ interface ProductProps {
   category: string;
   id: string;
 }
-export default async function ItemsGallery(): Promise<JSX.Element> {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-
+export default async function fetchItems(): Promise<JSX.Element> {
   try {
     const products: ProductProps[] = await getProductsData();
 
     return (
-      <main className="flex justify-center mx-auto mt-10 max-w-[1080px] text-white ">
+      <main className="flex justify-center mx-auto mt-10 max-w-[1080px] text-white relative ">
         <div className="grid grid-cols-4 gap-[50px] ">
           {products.map((product, i) => (
             <div key={i}>
@@ -58,3 +57,13 @@ export default async function ItemsGallery(): Promise<JSX.Element> {
     return <div>Error occurred while fetching posts.</div>;
   }
 }
+
+export const ItemGallery = () => {
+  return (
+    <div>
+      <Suspense fallback="Loading...">
+        <fetchItems />
+      </Suspense>
+    </div>
+  );
+};
