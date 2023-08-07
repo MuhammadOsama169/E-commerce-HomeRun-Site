@@ -1,18 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
-interface ProductProps {
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-  category: string;
-  id: string;
-  product: any;
-  setModal: boolean;
-  isModalOpen: boolean;
-}
+import { ProductProps } from '../types/ProductTypes';
+import Balancer from 'react-wrap-balancer';
 
 export const ProductSkeleton = ({
   title,
@@ -20,7 +10,6 @@ export const ProductSkeleton = ({
   price,
   image,
   id,
-  product,
 }: ProductProps) => {
   return (
     <>
@@ -36,7 +25,9 @@ export const ProductSkeleton = ({
           />
         </Link>
 
-        <h1 className="font-Montserrat text-lg mt-5 ">{title}</h1>
+        <h1 className="font-Montserrat text-lg mt-5 ">
+          <Balancer>{title}</Balancer>
+        </h1>
         <section className="flex mt-2 ">
           <div className="flex justify-start mx-auto">
             <h1 className=" font-Montserrat text-md bg-[#880808] rounded w-[100px] p-2">

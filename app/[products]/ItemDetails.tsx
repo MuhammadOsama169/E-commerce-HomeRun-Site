@@ -1,4 +1,3 @@
-'use client';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
@@ -6,6 +5,7 @@ import { addToCart, removeFromCart } from '../store/state/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { CartMenu } from './CartMenu';
+import { Loading } from '../components/Loading';
 
 interface ProductProps {
   title: string;
@@ -22,7 +22,9 @@ export const ItemDetails = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
     null
   );
-  const productsAdded = useSelector((state) => state.cart.cart);
+  const [isCartOpen, setCart] = useState<boolean>(false);
+
+  const productsAdded = useSelector((state: any) => state.cart.cart);
 
   const params = useParams();
 
@@ -45,23 +47,31 @@ export const ItemDetails = () => {
   const dispatch = useDispatch();
 
   const handleAddItem = () => {
+    setCart(true);
     dispatch(addToCart({ item: { ...selectedProduct } }));
   };
 
-  const totalPrice = productsAdded.reduce((total, product) => {
-    return total + product.price;
-  }, 0);
+  const totalPrice = productsAdded.reduce(
+    (total: number, product: ProductProps) => {
+      return total + product.price;
+    },
+    0
+  );
 
   // const handleRemoveItem = () => {
   //   dispatch(removeFromCart({ id: product.id }));
   // };
   if (!selectedProduct) {
-    return <p>Loading...</p>;
+    return (
+      <div className=" flex justify-center w-[500px] h-[500px] mx-auto">
+        <Loading />
+      </div>
+    );
   }
 
   return (
     <main>
-      <section className="flex mx-[200px] justify-center gap-5 mt-5 absolute">
+      <section className="flex mx-[200px] justify-center gap-5 mt-5 absolute ">
         <div className="flex">
           <Image
             alt="gallery"
@@ -98,9 +108,15 @@ export const ItemDetails = () => {
           </div>
         </div>
       </section>
-      <div className="bg-[#edf2f7] w-[500px] h-auto absolute top-0 right-0">
-        <CartMenu productsAdded={productsAdded} totalPrice={totalPrice} />
-      </div>
+      {isCartOpen === true && (
+        <div className="bg-[#edf2f7] w-[500px] h-auto absolute top-0 right-0  rounded">
+          <CartMenu
+            productsAdded={productsAdded}
+            totalPrice={totalPrice}
+            setCart={setCart}
+          />
+        </div>
+      )}
     </main>
   );
 };
