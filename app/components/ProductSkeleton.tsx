@@ -17,7 +17,7 @@ export const ProductSkeleton = ({
         <Link href={`./${id}`}>
           <Image
             alt="gallery"
-            src={image}
+            src={image[0]}
             width="0"
             height="0"
             sizes="100vw"

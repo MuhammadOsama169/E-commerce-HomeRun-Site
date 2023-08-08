@@ -5,7 +5,7 @@ import { addToCart, removeFromCart } from '../store/state/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { CartMenu } from './CartMenu';
-import { Loading } from '../components/Loading';
+import { Loading } from '../components/Loading/Loading';
 
 interface ProductProps {
   title: string;
@@ -75,7 +75,7 @@ export const ItemDetails = () => {
         <div className="flex">
           <Image
             alt="gallery"
-            src={selectedProduct.image}
+            src={selectedProduct.image[0]}
             width="0"
             height="0"
             sizes="100vw"
