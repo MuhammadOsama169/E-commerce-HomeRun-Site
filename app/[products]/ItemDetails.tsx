@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { CartMenu } from './CartMenu';
 import { Loading } from '../components/Loading/Loading';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
+import InnerImageZoom from 'react-inner-image-zoom';
 
 interface ProductProps {
   title: string;
@@ -23,6 +25,7 @@ export const ItemDetails = () => {
     null
   );
   const [isCartOpen, setCart] = useState<boolean>(false);
+  const [isSlected, setSelectImage] = useState<boolean>(false);
 
   const productsAdded = useSelector((state: any) => state.cart.cart);
 
@@ -50,7 +53,9 @@ export const ItemDetails = () => {
     setCart(true);
     dispatch(addToCart({ item: { ...selectedProduct } }));
   };
-
+  const handleClick = () => {
+    setSelectImage(!isSlected);
+  };
   const totalPrice = productsAdded.reduce(
     (total: number, product: ProductProps) => {
       return total + product.price;
@@ -72,13 +77,25 @@ export const ItemDetails = () => {
   return (
     <main>
       <section className="flex mx-[200px] justify-center gap-5 mt-5 absolute ">
-        <div className="flex">
+        <div className="flex gap-2">
           <Image
             alt="gallery"
-            src={selectedProduct.image[0]}
+            src={
+              isSlected ? selectedProduct.image[0] : selectedProduct.image[1]
+            }
             width="0"
             height="0"
             sizes="100vw"
+            className="w-[150px] h-[200px] rounded-md flex justify-center items-center cursor-pointer"
+            onClick={handleClick}
+          />{' '}
+          <InnerImageZoom
+            src={
+              isSlected ? selectedProduct.image[1] : selectedProduct.image[0]
+            }
+            zoomSrc={
+              isSlected ? selectedProduct.image[1] : selectedProduct.image[0]
+            }
             className="w-[400px] h-[500px] rounded-md flex justify-center items-center"
           />
         </div>
@@ -109,7 +126,7 @@ export const ItemDetails = () => {
         </div>
       </section>
       {isCartOpen === true && (
-        <div className="bg-[#edf2f7] w-[500px] h-auto absolute top-0 right-0  rounded">
+        <div className="bg-[#edf2f7] w-[400px] h-auto absolute top-0 right-0  rounded">
           <CartMenu
             productsAdded={productsAdded}
             totalPrice={totalPrice}
