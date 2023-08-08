@@ -35,14 +35,19 @@ export const CartMenu = ({ productsAdded, totalPrice, setCart }: CartProps) => {
             <div className="flex flex-col justify-center mx-auto">
               <Image
                 alt="gallery"
-                src={cartItem.image}
+                src={cartItem.image[0]}
                 width="0"
                 height="0"
                 sizes="100vw"
                 className="w-[200px] h-[300px] rounded-md flex justify-center items-center  "
               />
               <h1 className="text-black text-center my-2">
-                <Balancer>{cartItem.title}</Balancer>
+                <Balancer className="max-w-[100px]">{cartItem.title}</Balancer>
+              </h1>
+              <h1 className="text-black text-center my-2">
+                <Balancer className="max-w-[150px] font-Montserrat text-md bg-[#880808] rounded w-[150px] p-2 text-white">
+                  Price: ${cartItem.price}
+                </Balancer>
               </h1>
             </div>
           </main>

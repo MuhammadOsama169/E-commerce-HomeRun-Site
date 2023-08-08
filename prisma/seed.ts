@@ -123,11 +123,12 @@ const products:ProductTypes[] = [
 
     {
         id:generateRandomId(),
-        title:'Mens Casual Slim Fit',
-        price:200,
-        category:'Mens Clothing',
-        description:'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
-        image:['https://res.cloudinary.com/dwz4buven/image/upload/v1675064362/justin_buisson_JU_5_b_Uxr5_Rg_unsplash_1_269a25607d_0e958650d6.jpg']
+        title:'Womens High Heel Sandals',
+        price:150,
+        category:'Shoes',
+        description:'Elevate your style with our Womens High Heel Sandals, exuding sophistication and comfort. Crafted to perfection, these sandals blend fashion and elegance, making them the perfect choice for any occasion.',
+        image:['https://res.cloudinary.com/dwz4buven/image/upload/v1691499303/d8c6e14d-e576-4f6d-b60a-d99836e6e6f8_oaad0l.png',
+    'https://res.cloudinary.com/dwz4buven/image/upload/v1691499303/5934d48c-43b9-4ee9-9f5e-75b7cbefc3dc_dspsdt.png']
     },
 
     {
@@ -145,7 +146,8 @@ const products:ProductTypes[] = [
         price:150,
         category:'Shoes',
         description:'These leather shoes are specially designed for men, catering to various outdoor activities like hiking, trekking, and other adventurous pursuits. Crafted from high-quality leather, they offer durability, comfort, and style, making them the perfect choice for any outdoor enthusiast looking to conquer new terrains with confidence and ease.',
-        image:['https://res.cloudinary.com/dcxx6ihq2/image/upload/v1690706113/nathan-duler-shoes_tno88d.jpg']
+        image:['https://res.cloudinary.com/dcxx6ihq2/image/upload/v1690706113/nathan-duler-shoes_tno88d.jpg',
+    'https://res.cloudinary.com/dwz4buven/image/upload/v1691498880/pexels-pixabay-267242_brkbqz.jpg']
     },
 
     {
@@ -176,14 +178,7 @@ const products:ProductTypes[] = [
         image:['https://res.cloudinary.com/dcxx6ihq2/image/upload/v1690706113/white-graphic-tee_dgylwk.jpg',
     'https://res.cloudinary.com/dcxx6ihq2/image/upload/v1690706113/white-graphic-tee_dwwkg6.jpg']
     },
-    {
-        id:generateRandomId(),
-        title:'White Casual T-Shirt',
-        price:50,
-        category:'Mens Clothing',
-        description:'This white graphic tee for men features a minimalist design, combining comfort and style effortlessly. Crafted from soft, high-quality cotton, it showcases a timeless appeal that complements any casual outfit, making it a wardrobe essential for fashion-conscious men.',
-        image:['https://res.cloudinary.com/dcxx6ihq2/image/upload/v1690706114/white-tee-men_biiqbi.jpg']
-    },
+
     
 ]
 function generateRandomId() {
