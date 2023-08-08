@@ -8,14 +8,14 @@ datasource db {
 }
 
 model Product {
-  id          String  @id
+  id          String   @id
   title       String
   description String?
   userId      String?
-  image       String
+  image       String[]
   category    String
   price       Int
-  User        User?   @relation(fields: [userId], references: [id])
+  User        User?    @relation(fields: [userId], references: [id])
 }
 
 //Next Auth docs
