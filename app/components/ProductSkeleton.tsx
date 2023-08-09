@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { ProductProps } from '../types/ProductTypes';
 import Balancer from 'react-wrap-balancer';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const ProductSkeleton = ({
   title,

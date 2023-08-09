@@ -8,6 +8,7 @@ import { CartMenu } from './CartMenu';
 import { Loading } from '../components/Loading/Loading';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 import InnerImageZoom from 'react-inner-image-zoom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ProductProps {
   title: string;
@@ -63,9 +64,6 @@ export const ItemDetails = () => {
     0
   );
 
-  // const handleRemoveItem = () => {
-  //   dispatch(removeFromCart({ id: product.id }));
-  // };
   if (!selectedProduct) {
     return (
       <div className=" flex justify-center w-[500px] h-[500px] mx-auto">
@@ -75,7 +73,11 @@ export const ItemDetails = () => {
   }
 
   return (
-    <main>
+    <motion.div
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <section className="flex mx-[200px] justify-center gap-5 mt-5 absolute ">
         <div className="flex gap-2">
           <Image
@@ -125,16 +127,25 @@ export const ItemDetails = () => {
           </div>
         </div>
       </section>
-      {isCartOpen === true && (
-        <div className="bg-[#edf2f7] w-[400px] h-auto absolute top-0 right-0  rounded">
-          <CartMenu
-            productsAdded={productsAdded}
-            totalPrice={totalPrice}
-            setCart={setCart}
-          />
-        </div>
-      )}
-    </main>
+      <AnimatePresence>
+        {isCartOpen === true && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="bg-[#edf2f7] w-[400px] h-auto absolute top-0 right-0  rounded">
+              <CartMenu
+                productsAdded={productsAdded}
+                totalPrice={totalPrice}
+                setCart={setCart}
+                selectedProduct={selectedProduct}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
