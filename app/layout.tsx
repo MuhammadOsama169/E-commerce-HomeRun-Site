@@ -3,7 +3,6 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import ProviderAuth from './components/AuthProvider';
 const inter = Inter({ subsets: ['latin'] });
-import { motion } from 'framer-motion';
 
 export const metadata = {
   title: 'HomeRun',
