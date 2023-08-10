@@ -37,7 +37,7 @@ export const Navbar = () => {
                 className="rounded-full md:mr-10"
                 alt="profile"
               />
-              <Link href="/submissions">
+              <Link href="/checkout">
                 {/* Cart */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ export const Navbar = () => {
           ) : (
             <nav className="flex px-5 gap-5 my-5">
               <SignInButton />
-              <Link href="/submissions">
+              <Link href="/checkout">
                 {' '}
                 {/* Cart */}
                 <svg

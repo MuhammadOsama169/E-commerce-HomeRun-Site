@@ -5,6 +5,7 @@ import { ProductProps } from '../types/ProductTypes';
 import { Balancer } from 'react-wrap-balancer';
 import { useDispatch } from 'react-redux';
 import { removeFromCart } from '../store/state/cartSlice';
+import Link from 'next/link';
 
 interface CartProps {
   totalPrice: number;
@@ -105,9 +106,11 @@ export const CartMenu = ({
         </section>
 
         <div className="flex justify-center">
-          <button className="text-white hover:text-white border border-red-700 bg-black hover:bg-red-500  focus:ring-2 focus:outline-none focus:ring-red-300 font-medium  text-sm px-5 py-2.5 text-center mr-2 mb-2 w-[80%] mt-2">
-            Chekout
-          </button>
+          <Link href="/checkout" className="flex justify-center w-[80%]">
+            <button className="text-white w-full  hover:text-white border border-red-700 bg-black hover:bg-red-500 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium text-sm px-5 py-2.5 text-center mt-2">
+              Checkout
+            </button>
+          </Link>
         </div>
       </div>
     </main>
