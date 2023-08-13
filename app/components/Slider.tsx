@@ -27,7 +27,7 @@ export const Slider = () => {
           }}
           navigation
           modules={[Autoplay, Pagination, Navigation]}
-          className="w-[90vw] h-[90vh] mt-5 rounded-xl"
+          className="md:w-[90vw] md:h-[90vh] w-full mt-5 rounded-xl"
         >
           <SwiperSlide>
             <Image src={Img7} alt="" sizes="100vh" />

@@ -17,7 +17,6 @@ export const CheckoutPage = () => {
     dispatch(removeFromCart({ id }));
   };
 
-  console.log(ShoppingCartItems);
   return (
     <main>
       {ShoppingCartItems.length === 0 && (
@@ -33,29 +32,35 @@ export const CheckoutPage = () => {
       {ShoppingCartItems.map((cartItem) => (
         <main
           key={cartItem.id}
-          className="flex p-5 my-10 mx-[200px] rounded-lg shadow-[#D3D3D3] shadow"
+          className="flex p-5 my-10 md:mx-[200px] mx-[50px] rounded-lg shadow-[#D3D3D3] shadow "
         >
-          <section className="flex justify-center mx-auto">
+          <section className="flex flex-col md:flex justify-center mx-auto">
             <Image
               alt="gallery"
               src={cartItem.image[0]}
               width="0"
               height="0"
               sizes="100vw"
-              className="w-[200px] h-[300px] rounded-md flex justify-center items-center  "
+              className="md:w-[200px] w-auto h-[300px] rounded-md flex justify-center items-center  "
             />
-            <section className="flex flex-col ml-10">
-              <h1 className="text-white  my-2 text-4xl font-Montserrat">
-                <Balancer>{cartItem.title}</Balancer>
+            <section className="flex flex-col md:ml-10 font-Montserrat">
+              <h1>
+                <Balancer className="text-white  my-2 md:text-4xl text-xl">
+                  {cartItem.title}
+                </Balancer>
               </h1>
-              <h1 className="text-white  my-2 font-Montserrat text-sm ">
-                <Balancer>{cartItem.description}</Balancer>
+              <h1>
+                <Balancer className="text-white  my-2  text-sm ">
+                  {cartItem.description}
+                </Balancer>
               </h1>
               <span className="text-[#00FFFF]">In stock</span>
-              <span className="text-white">Eligible for FREE delivery</span>
+              <span className="text-white text-bold">
+                Eligible for FREE delivery
+              </span>
               <div className="flex  items-center  gap-2 mx-auto">
                 {/* // */}
-                <section className="flex items-center justify-between gap-2 w-[800px] font-Montserrat text-md mt-12">
+                <section className="flex items-center justify-between gap-2 md:w-[800px]  text-md mt-12">
                   <h1 className="text-black text-center my-2 flex justify-start  ">
                     <Balancer className=" bg-[#880808] rounded p-2 text-white">
                       Price: ${cartItem.price}
@@ -63,7 +68,7 @@ export const CheckoutPage = () => {
                   </h1>
                   <div
                     className="flex justify-end cursor-pointer"
-                    onClick={() => handleRemoveItem(cartItem.id)}
+                    onClick={() => handleRemoveItem(cartItem?.id)}
                   >
                     <p className="text-white ">Remove Item</p>
                     <svg
@@ -87,8 +92,11 @@ export const CheckoutPage = () => {
           </section>
         </main>
       ))}
-      <Link href="/checkout" className="flex justify-center w-[500px] mx-auto">
-        <button className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2">
+      <Link
+        href="/checkout"
+        className="flex justify-center md:w-[500px] w-auto md:mx-auto mx-[100px]"
+      >
+        <button className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2 my-10">
           Proceed to Buy
         </button>
       </Link>
