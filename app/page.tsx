@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { Slider } from './components/Slider';
 import { Balancer } from 'react-wrap-balancer';
-import Image from 'next/image';
-import dynamite from '../public/assets/dddynamite (2).svg';
 
 export default function Home() {
   return (
@@ -15,13 +13,6 @@ export default function Home() {
         <h1 className=" lg:text-6xl font-Montserrat text-5xl font-bold tracking-wider text-center text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 my-10">
           <Balancer>Discover Your Style</Balancer>
         </h1>
-        <Image
-          src={dynamite}
-          alt="line"
-          width={0}
-          height={0}
-          className="md:absolute left-[1054px]"
-        />
         <ItemsGallery />
       </main>
     </Provider>

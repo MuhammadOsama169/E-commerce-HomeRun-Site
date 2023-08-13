@@ -29,7 +29,7 @@ export default function ItemGallery() {
 
   return (
     <main className="flex justify-center mx-auto mt-10 max-w-[1080px] text-white relative">
-      <div className="grid grid-cols-4 gap-[50px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 p-2  lg:grid-cols-4 md:gap-[50px] gap-[16px] ">
         {products.map((product, i) => (
           <div key={i}>
             <ProductSkeleton
