@@ -18,6 +18,17 @@ model Product {
   User        User?    @relation(fields: [userId], references: [id])
 }
 
+model Order {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  price     Decimal
+  products  Json[]
+  status    String
+  intent_id String?
+  user      User     @relation(fields: [userEmail], references: [email])
+  userEmail String
+}
+
 //Next Auth docs
 model Account {
   id                 String    @id @default(cuid())
@@ -57,6 +68,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Product       Product[]
+  Order         Order[]
 }
 
 model VerificationRequest {

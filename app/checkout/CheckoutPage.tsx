@@ -6,15 +6,46 @@ import { Balancer } from 'react-wrap-balancer';
 import { removeFromCart } from '../store/state/cartSlice';
 import { ProductProps } from '../types/ProductTypes';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export const CheckoutPage = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const dispatch = useDispatch();
+
   const ShoppingCartItems: ProductProps[] = useSelector(
     (state: any) => state.cart.cart
   );
 
   const handleRemoveItem = (id: number) => {
     dispatch(removeFromCart({ id }));
+  };
+
+  const handleCheckout = async () => {
+    if (!session) {
+      router.push('/');
+    } else {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              // price:totalPrice,
+              // products,
+              status: 'Not Paid',
+              userEmail: session.user?.email,
+            }),
+          }
+        );
+        const data = await res.json();
+        router.push(`/pay/${data.id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -96,7 +127,10 @@ export const CheckoutPage = () => {
         href="/checkout"
         className="flex justify-center md:w-[500px] w-auto md:mx-auto mx-[100px]"
       >
-        <button className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2 my-10">
+        <button
+          className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2 my-10"
+          onClick={handleCheckout}
+        >
           Proceed to Buy
         </button>
       </Link>
