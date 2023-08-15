@@ -1,7 +1,12 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { addToCart, removeFromCart } from '../store/state/cartSlice';
+import {
+  addToCart,
+  removeFromCart,
+  totalPriceCart,
+} from '../store/state/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { CartMenu } from './CartMenu';
@@ -53,11 +58,14 @@ export const ItemDetails = () => {
 
   const handleAddItem = () => {
     setCart(true);
+
     dispatch(addToCart({ item: { ...selectedProduct } }));
   };
+
   const handleClick = () => {
     setSelectImage(!isSlected);
   };
+
   const totalPrice = productsAdded.reduce(
     (total: number, product: ProductProps) => {
       return total + product.price;

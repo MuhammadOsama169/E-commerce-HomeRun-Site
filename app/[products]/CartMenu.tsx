@@ -4,7 +4,7 @@ import CartGif from '../../public/assets/wired-lineal-139-basket.gif';
 import { ProductProps } from '../types/ProductTypes';
 import { Balancer } from 'react-wrap-balancer';
 import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../store/state/cartSlice';
+import { removeFromCart, totalPriceCart } from '../store/state/cartSlice';
 import Link from 'next/link';
 
 interface CartProps {
@@ -24,7 +24,10 @@ export const CartMenu = ({
   const handleRemoveItem = () => {
     dispatch(removeFromCart({ id: selectedProduct.id }));
   };
-
+  const handleCheckoutPrice = () => {
+    dispatch(totalPriceCart(totalPrice));
+  };
+  console.log(totalPrice);
   return (
     <main className="flex flex-col my-5">
       <div className="px-10 py-5 cursor-pointer">
@@ -107,7 +110,10 @@ export const CartMenu = ({
 
         <div className="flex justify-center">
           <Link href="/checkout" className="flex justify-center w-[80%]">
-            <button className="text-white w-full  hover:text-white border border-red-700 bg-black hover:bg-red-500 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium text-sm px-5 py-2.5 text-center mt-2">
+            <button
+              className="text-white w-full  hover:text-white border border-red-700 bg-black hover:bg-red-500 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium text-sm px-5 py-2.5 text-center mt-2"
+              onClick={handleCheckoutPrice}
+            >
               Checkout
             </button>
           </Link>

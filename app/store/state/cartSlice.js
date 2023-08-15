@@ -4,6 +4,7 @@ const initialState = {
   isCartOpen: false,
   cart: [],
   items: [],
+  total: [],
 };
 
 export const cartSlice = createSlice({
@@ -22,26 +23,29 @@ export const cartSlice = createSlice({
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
 
-    increaseCount: (state, action) => {
-      state.cart = state.cart.map((item) => {
-        if (item.id === action.payload.id) {
-          item.count++;
-        }
-        return item;
-      });
-    },
+    // increaseCount: (state, action) => {
+    //   state.cart = state.cart.map((item) => {
+    //     if (item.id === action.payload.id) {
+    //       item.count++;
+    //     }
+    //     return item;
+    //   });
+    // },
 
-    decreaseCount: (state, action) => {
-      state.cart = state.cart.map((item) => {
-        if (item.id === action.payload.id && item.count > 1) {
-          item.count--;
-        }
-        return item;
-      });
-    },
+    // decreaseCount: (state, action) => {
+    //   state.cart = state.cart.map((item) => {
+    //     if (item.id === action.payload.id && item.count > 1) {
+    //       item.count--;
+    //     }
+    //     return item;
+    //   });
+    // },
 
     setIsCartOpen: (state) => {
       state.isCartOpen = !state.isCartOpen;
+    },
+    totalPriceCart: (state, action) => {
+      state.total = action.payload;
     },
   },
 });
@@ -50,8 +54,7 @@ export const {
   setItems,
   addToCart,
   removeFromCart,
-  increaseCount,
-  decreaseCount,
+  totalPriceCart,
   setIsCartOpen,
 } = cartSlice.actions;
 
