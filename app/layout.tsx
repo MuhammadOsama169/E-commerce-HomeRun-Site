@@ -4,6 +4,9 @@ import { Inter } from 'next/font/google';
 import ProviderAuth from './components/AuthProvider';
 const inter = Inter({ subsets: ['latin'] });
 
+import { store } from './store';
+import { Providers } from './Provider';
+
 export const metadata = {
   title: 'HomeRun',
   description:
@@ -18,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <ProviderAuth>
-          <Navbar />
-          {children}
-        </ProviderAuth>
+        <Providers>
+          <ProviderAuth>
+            <Navbar />
+            {children}
+          </ProviderAuth>
+        </Providers>
       </body>
     </html>
   );

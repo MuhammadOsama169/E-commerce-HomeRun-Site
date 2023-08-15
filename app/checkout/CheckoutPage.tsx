@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CartGif from '../../public/assets/wired-lineal-139-basket.gif';
@@ -13,6 +14,10 @@ export const CheckoutPage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const dispatch = useDispatch();
+  const totalPrice = useSelector((state: any) => state.cart.total);
+  const products: ProductProps[] = useSelector(
+    (state: any) => state.cart.items
+  );
 
   const ShoppingCartItems: ProductProps[] = useSelector(
     (state: any) => state.cart.cart
@@ -33,8 +38,8 @@ export const CheckoutPage = () => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              // price:totalPrice,
-              // products,
+              price: totalPrice,
+              products,
               status: 'Not Paid',
               userEmail: session.user?.email,
             }),
@@ -65,7 +70,7 @@ export const CheckoutPage = () => {
           key={cartItem.id}
           className="flex p-5 my-10 md:mx-[200px] mx-[50px] rounded-lg shadow-[#D3D3D3] shadow "
         >
-          <section className="flex flex-col md:flex justify-center mx-auto">
+          <section className="flex flex-col md:flex-row justify-center mx-auto">
             <Image
               alt="gallery"
               src={cartItem.image[0]}
@@ -119,21 +124,23 @@ export const CheckoutPage = () => {
                   </div>
                 </section>
               </div>
+              {/* end */}
             </section>
           </section>
         </main>
       ))}
-      <Link
-        href="/checkout"
-        className="flex justify-center md:w-[500px] w-auto md:mx-auto mx-[100px]"
-      >
+      <h2 className="text-3xl font-Montserrat my-10 text-white font-bold  px-4 py-2 rounded-lg flex justify-center">
+        Total Price: <span className="text-yellow-600">${totalPrice}</span>
+      </h2>
+
+      <section className="flex justify-center md:w-[500px] w-auto md:mx-auto mx-[100px]">
         <button
           className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2 my-10"
           onClick={handleCheckout}
         >
           Proceed to Buy
         </button>
-      </Link>
+      </section>
     </main>
   );
 };
