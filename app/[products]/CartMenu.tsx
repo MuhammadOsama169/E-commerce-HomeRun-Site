@@ -27,7 +27,7 @@ export const CartMenu = ({
   const handleCheckoutPrice = () => {
     dispatch(totalPriceCart(totalPrice));
   };
-  console.log(totalPrice);
+
   return (
     <main className="flex flex-col my-5">
       <div className="px-10 py-5 cursor-pointer">
@@ -36,7 +36,7 @@ export const CartMenu = ({
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
-          stroke="currentColor"
+          stroke="white"
           className="w-6 h-6 hover:scale-[1.2]"
           onClick={() => setCart(false)}
         >
@@ -53,7 +53,7 @@ export const CartMenu = ({
           <div className="flex flex-col justify-center mx-auto my-5 ">
             {' '}
             <Image src={CartGif} alt="cart" className="w-[100px]  mx-auto  " />
-            <p className="text-black text-lg flex mx-auto  ">
+            <p className="text-white text-lg flex mx-auto  ">
               Cart Is Empty :(
             </p>
           </div>
@@ -70,22 +70,22 @@ export const CartMenu = ({
                 sizes="100vw"
                 className="w-[200px] h-[300px] rounded-md flex justify-center items-center  "
               />
-              <h1 className="text-black text-center my-2">
-                <Balancer className="max-w-[100px]">{cartItem.title}</Balancer>
+              <h1 className="text-white text-center my-2">
+                <Balancer className="max-w-[150px]">{cartItem.title}</Balancer>
               </h1>
               <div className="flex items-center justify-between gap-2">
-                <h1 className="text-black text-center my-2 flex justify-start ">
-                  <Balancer className="max-w-[150px] font-Montserrat text-md bg-[#880808] rounded w-[150px] p-2 text-white">
+                <h1 className="text-white text-center my-2 flex justify-start ">
+                  <Balancer className="max-w-[150px] font-Montserrat text-md bg-[#8212F4] 	 rounded w-[150px] p-2 text-white">
                     Price: ${cartItem.price}
                   </Balancer>
                 </h1>
 
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="white"
+                  fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
-                  stroke="black"
+                  stroke="white"
                   className="w-6 h-6 flex justify-end hover:scale-[1.2]"
                   onClick={handleRemoveItem}
                 >
@@ -100,10 +100,10 @@ export const CartMenu = ({
           </main>
         ))}
         {/* End of cart  */}
-        <section className="mx-5">
-          <h1 className="text-2xl font-bold mb-4 text-black">Cart Total</h1>
+        <section className="m-5">
+          <h1 className="text-2xl font-bold mb-4 text-white">Cart Total</h1>
           <div className="flex justify-between items-center">
-            <h2 className="text-black text-lg font-medium">Total:</h2>
+            <h2 className="text-white text-lg font-medium">Total:</h2>
             <h2 className="text-blue-600 text-xl font-bold">${totalPrice}</h2>
           </div>
         </section>
@@ -111,7 +111,7 @@ export const CartMenu = ({
         <div className="flex justify-center">
           <Link href="/checkout" className="flex justify-center w-[80%]">
             <button
-              className="text-white w-full  hover:text-white border border-red-700 bg-black hover:bg-red-500 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium text-sm px-5 py-2.5 text-center mt-2"
+              className="text-white w-full  hover:text-white border  bg-[#8212F4] hover:bg-red-500 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium text-sm px-5 py-2.5 text-center mt-2"
               onClick={handleCheckoutPrice}
             >
               Checkout
