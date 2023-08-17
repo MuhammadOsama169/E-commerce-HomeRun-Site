@@ -15,9 +15,6 @@ export const CheckoutPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const totalPrice = useSelector((state: any) => state.cart.total);
-  const products: ProductProps[] = useSelector(
-    (state: any) => state.cart.items
-  );
 
   const ShoppingCartItems: ProductProps[] = useSelector(
     (state: any) => state.cart.cart
@@ -26,6 +23,16 @@ export const CheckoutPage = () => {
   const handleRemoveItem = (id: number) => {
     dispatch(removeFromCart({ id }));
   };
+  const dummyOrder = {
+    price: 100,
+    products: ['Product 1', 'Product 2'],
+    status: 'Not Paid',
+    userEmail: 'example@test.com',
+  };
+
+  const OrdereredProduct = ShoppingCartItems.map((cart) => {
+    return cart.title;
+  });
 
   const handleCheckout = async () => {
     if (!session) {
@@ -39,14 +46,15 @@ export const CheckoutPage = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               price: totalPrice,
-              products,
+              products: OrdereredProduct,
               status: 'Not Paid',
-              userEmail: session.user?.email,
+              userEmail: session.user.email,
             }),
           }
         );
         const data = await res.json();
-        router.push(`/pay/${data.id}`);
+        // router.push(`/pay/${data.id}`);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -98,7 +106,7 @@ export const CheckoutPage = () => {
                 {/* // */}
                 <section className="flex items-center justify-between gap-2 md:w-[800px]  text-md mt-12">
                   <h1 className="text-black text-center my-2 flex justify-start  ">
-                    <Balancer className=" bg-[#880808] rounded p-2 text-white">
+                    <Balancer className=" bg-[#8212F4] rounded p-2 text-white">
                       Price: ${cartItem.price}
                     </Balancer>
                   </h1>

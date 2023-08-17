@@ -158,7 +158,7 @@ export const ItemDetails = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <div className="bg-[#edf2f7] w-[300px] md:w-[400px] h-auto absolute top-0 right-0  rounded">
+            <div className="bg-[#121212]  w-[300px] md:w-[400px] h-auto absolute top-0 right-0  rounded">
               <CartMenu
                 productsAdded={productsAdded}
                 totalPrice={totalPrice}

@@ -31,7 +31,7 @@ export const ProductSkeleton = ({
         </h1>
         <section className="flex mt-2  ">
           <div className="flex justify-start mx-auto">
-            <h1 className=" font-Montserrat text-md bg-[#880808] rounded w-[100px] p-2">
+            <h1 className=" font-Montserrat text-md bg-[#8212F4] rounded w-[100px] p-2">
               ${price}
             </h1>
           </div>
@@ -39,10 +39,10 @@ export const ProductSkeleton = ({
           <div className="flex justify-end mx-auto items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="red"
+              fill="#ff00f5"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="red"
+              stroke="#ff00f5"
               className="md:w-6 md:h-6 hidden md:flex"
             >
               <path
