@@ -53,7 +53,7 @@ export const CheckoutPage = () => {
           }
         );
         const data = await res.json();
-        // router.push(`/pay/${data.id}`);
+        router.push(`/pay/${data.id}`);
         console.log(data);
       } catch (error) {
         console.log(error);
