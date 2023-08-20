@@ -1,5 +1,7 @@
 import React from 'react';
 
-export const Success = () => {
+const Success = () => {
   return <div>page</div>;
 };
+
+export default Success;
