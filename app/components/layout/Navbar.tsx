@@ -6,12 +6,14 @@ import Image from 'next/image';
 import logo from '../../../public/assets/logo-homerun.png';
 import Link from 'next/link';
 import { SignInButton, SignOutButton } from '../buttons';
+import { useSelector } from 'react-redux';
 
 export const Navbar = () => {
   const { data: session } = useSession();
 
   const [isMenuToggled, setMenuToggled] = React.useState<boolean>(false);
-
+  const isCartOpen = useSelector((state: any) => state.cart.isCartOpen);
+  console.log(isCartOpen);
   const handleClick = () => {
     setMenuToggled(!isMenuToggled);
   };
@@ -29,28 +31,41 @@ export const Navbar = () => {
         <div className="sm:flex hidden">
           {session?.user ? (
             <div className="flex gap-3 md:gap-5 items-center px-5">
+              <Link href={'/orders'}>Orders</Link>
+
               <Link href="/checkout">
                 {/* Cart */}
 
                 <div className="flex gap-2">
                   <h1>Cart</h1>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                    />
-                  </svg>
+
+                  <div className="flex">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 "
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                      />
+                    </svg>
+                    <div className="flex alig">
+                      {isCartOpen && (
+                        <span className="relative w-3 h-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </Link>
 
+              <SignOutButton />
               <Image
                 src={session?.user.image}
                 width={37}
@@ -58,11 +73,42 @@ export const Navbar = () => {
                 className="rounded-full "
                 alt="profile"
               />
-              <SignOutButton />
             </div>
           ) : (
             <nav className="flex px-5 gap-5 my-5">
+              <Link href={'/orders'}>Orders</Link>
+              <Link href="/checkout">
+                {/* Cart */}
+
+                <div className="flex gap-2">
+                  <h1>Cart</h1>
+
+                  <div className="flex">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                      />
+                    </svg>
+                    {isCartOpen === true && (
+                      <span className="relative w-6 h-6">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
               <SignInButton />
+
               <Link href="/checkout">
                 {' '}
                 {/* Cart */}
@@ -72,7 +118,7 @@ export const Navbar = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-6 h-6 "
                 >
                   <path
                     strokeLinecap="round"
@@ -135,6 +181,7 @@ export const Navbar = () => {
 
               <div className="flex flex-col text-white justify-center mx-auto items-center text-xl gap-5 pt-10">
                 <Link href={'/'}>Home</Link>
+                <Link href={'/orders'}>Orders</Link>
                 <Link href="/checkout">
                   <div className="flex gap-2">
                     <h1>Cart</h1>

@@ -2,6 +2,7 @@ import { getAuthSession } from "@/app/utils/auth";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '../../lib/prisma'
 
+// CREATE ORDER
 export const POST = async (req: NextRequest) => {
     const session = await getAuthSession();
   
@@ -26,3 +27,24 @@ export const POST = async (req: NextRequest) => {
       );
     }
   };
+
+  // FETCH ALL ORDERS
+  export async function GET() {
+    try {
+      const posts = await prisma.order.findMany({
+        orderBy:{
+          createdAt:'desc'
+        },
+        select:{
+          status:true,
+          createdAt:true,
+          price:true,
+          products:true,
+          id:true
+        }
+      });
+      return NextResponse.json(posts);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  }
