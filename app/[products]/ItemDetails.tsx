@@ -6,6 +6,7 @@ import {
   addToCart,
   removeFromCart,
   totalPriceCart,
+  setIsCartOpen,
 } from '../store/state/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -60,6 +61,7 @@ export const ItemDetails = () => {
     setCart(true);
 
     dispatch(addToCart({ item: { ...selectedProduct } }));
+    dispatch(setIsCartOpen(true));
   };
 
   const handleClick = () => {

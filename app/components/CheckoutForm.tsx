@@ -5,6 +5,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { AddressForm } from './AddressForm';
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -83,55 +84,58 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form
-      id="payment-form"
-      onSubmit={handleSubmit}
-      className="p-4 rounded shadow-lg my-20 max-w-[1080px] flex flex-col justify-center mx-auto"
-    >
-      <div className="mb-4">
-        <label
-          htmlFor="email"
-          className="block text-white text-sm font-bold mb-2"
-        >
-          Email Address
-        </label>
-        <LinkAuthenticationElement
-          id="link-authentication-element"
-          className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-          // onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-
-      <div className="mb-4">
-        <label
-          htmlFor="card"
-          className="block text-white text-sm font-bold mb-2"
-        >
-          Card Information
-        </label>
-        <PaymentElement
-          id="payment-element"
-          options={paymentElementOptions}
-          className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
-        />
-      </div>
-
-      <button
-        disabled={isLoading || !stripe || !elements}
-        id="submit"
-        className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
-      >
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay Now'}
-        </span>
-      </button>
-
-      {/* Show any error or success messages */}
-      {message && (
-        <div id="payment-message" className="text-red-500 text-sm mt-2">
-          {message}
+    <main className="p-4 rounded shadow-lg my-20 max-w-[1080px] flex flex-col justify-center mx-auto">
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block text-white text-sm font-bold mb-2"
+          >
+            Email Address
+          </label>
+          <LinkAuthenticationElement
+            id="link-authentication-element"
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            // onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
-      )}
-    </form>
+
+        <div className="mb-4">
+          <label
+            htmlFor="card"
+            className="block text-white text-sm font-bold mb-2"
+          >
+            Card Information
+          </label>
+          <PaymentElement
+            id="payment-element"
+            options={paymentElementOptions}
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </div>
+
+        <button
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+          className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700"
+        >
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              'Pay Now'
+            )}
+          </span>
+        </button>
+
+        {/* Show any error or success messages */}
+        {message && (
+          <div id="payment-message" className="text-red-500 text-sm mt-2">
+            {message}
+          </div>
+        )}
+      </form>
+      <AddressForm />
+    </main>
   );
 }

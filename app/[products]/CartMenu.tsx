@@ -4,7 +4,11 @@ import CartGif from '../../public/assets/wired-lineal-139-basket.gif';
 import { ProductProps } from '../types/ProductTypes';
 import { Balancer } from 'react-wrap-balancer';
 import { useDispatch } from 'react-redux';
-import { removeFromCart, totalPriceCart } from '../store/state/cartSlice';
+import {
+  removeFromCart,
+  totalPriceCart,
+  setIsCartOpen,
+} from '../store/state/cartSlice';
 import Link from 'next/link';
 
 interface CartProps {
@@ -23,6 +27,7 @@ export const CartMenu = ({
   const dispatch = useDispatch();
   const handleRemoveItem = () => {
     dispatch(removeFromCart({ id: selectedProduct.id }));
+    dispatch(setIsCartOpen(false));
   };
   const handleCheckoutPrice = () => {
     dispatch(totalPriceCart(totalPrice));
