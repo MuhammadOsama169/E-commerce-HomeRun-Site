@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Balancer } from 'react-wrap-balancer';
 import { removeFromCart } from '../store/state/cartSlice';
 import { ProductProps } from '../types/ProductTypes';
-import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
@@ -33,7 +32,7 @@ export const CheckoutPage = () => {
   const OrdereredProduct = ShoppingCartItems.map((cart) => {
     return cart.title;
   });
-
+  console.log(ShoppingCartItems);
   const handleCheckout = async () => {
     if (!session) {
       router.push('/');
@@ -137,14 +136,24 @@ export const CheckoutPage = () => {
           </section>
         </main>
       ))}
-      <h2 className="text-3xl font-Montserrat my-10 text-white font-bold  px-4 py-2 rounded-lg flex justify-center">
-        Total Price: <span className="text-yellow-600">${totalPrice}</span>
-      </h2>
+      {totalPrice.lenght === undefined ? (
+        <div></div>
+      ) : (
+        <h2 className="text-3xl font-Montserrat my-10 text-white font-bold  px-4 py-2 rounded-lg flex justify-center">
+          Total Price: <span className="text-yellow-600">${totalPrice}</span>
+        </h2>
+      )}
 
-      <section className="flex justify-center md:w-[500px] w-auto md:mx-auto mx-[100px]">
+      <section className="flex flex-col justify-center md:w-[500px] w-auto md:mx-auto mx-[100px]">
+        {!session && (
+          <span className="text-xl text-red-400 font-Montserrat text-bold text-center mx-auto">
+            You Must Be Signed In to Proceed!
+          </span>
+        )}
         <button
-          className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2 my-10"
+          className="text-white w-full hover:text-white border border-blue-700 bg-blue-800 disabled:bg-blue-400 hover:bg-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center mt-2 my-10"
           onClick={handleCheckout}
+          disabled={!session || ShoppingCartItems.length === 0}
         >
           Proceed to Buy
         </button>
