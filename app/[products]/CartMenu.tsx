@@ -10,6 +10,8 @@ import {
   setIsCartOpen,
 } from '../store/state/cartSlice';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface CartProps {
   totalPrice: number;
@@ -25,9 +27,14 @@ export const CartMenu = ({
   selectedProduct,
 }: CartProps) => {
   const dispatch = useDispatch();
+
   const handleRemoveItem = () => {
     dispatch(removeFromCart({ id: selectedProduct.id }));
     dispatch(setIsCartOpen(false));
+    toast.warning('Item removed from cart!', {
+      position: 'top-center',
+      autoClose: 2000,
+    });
   };
   const handleCheckoutPrice = () => {
     dispatch(totalPriceCart(totalPrice));
@@ -84,7 +91,7 @@ export const CartMenu = ({
                     Price: ${cartItem.price}
                   </Balancer>
                 </h1>
-
+                <ToastContainer />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

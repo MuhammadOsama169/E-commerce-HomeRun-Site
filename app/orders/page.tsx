@@ -1,10 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Lottie from 'lottie-react';
+import animationPanda from '../../public/assets/animation-panda.json';
+import { Balancer } from 'react-wrap-balancer';
+import { useSession } from 'next-auth/react';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-
-  console.log(orders);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const getOrders = async () => {
@@ -21,9 +24,29 @@ const Orders = () => {
   return (
     <main className="bg-gray-900 p-10 min-h-screen">
       <section className="container mx-auto">
-        <h1 className="text-3xl text-white font-bold mb-8">Orders</h1>
+        <h1 className=" text-white font-bold mb-8 font-Montserrat text-4xl">
+          <Balancer className="text-white text-center "> Orders</Balancer>
+        </h1>
+        {!session && (
+          <div className="w-[400px] h-[400px] my-10 flex flex-col justify-center mx-auto">
+            {' '}
+            <Lottie animationData={animationPanda} />
+            <h1 className="mx-auto font-Montserrat text-4xl mb-10">
+              <Balancer className="text-white text-center ">
+                Please Sign in to check your orders
+              </Balancer>
+            </h1>
+          </div>
+        )}
+        {/* Panda */}
 
-        <div className="bg-gray-800 rounded-lg shadow overflow-hidden overflow-x-auto">
+        <div
+          className={`${
+            session
+              ? 'bg-gray-800 rounded-lg shadow overflow-hidden overflow-x-auto'
+              : 'hidden'
+          } `}
+        >
           <table className="min-w-full bg-gray-800">
             <thead className="bg-gray-700 text-white">
               <tr>
