@@ -67,7 +67,7 @@ export const ItemDetails = () => {
     setSelectImage(!isSlected);
   };
 
-  const totalPrice = productsAdded.reduce(
+  const totalPrice = productsAdded?.reduce(
     (total: number, product: ProductProps) => {
       return total + product.price;
     },

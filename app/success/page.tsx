@@ -22,7 +22,7 @@ const Success = () => {
       }
     };
     updateOrderReq();
-    // router.push('/orders');
+    router.push('/orders');
   }, [payment_intent, router]);
 
   return (

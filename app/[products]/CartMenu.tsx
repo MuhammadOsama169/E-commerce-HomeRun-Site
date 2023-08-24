@@ -61,7 +61,7 @@ export const CartMenu = ({
       </div>
       {/* CartMenu items */}
       <div className="text-white flex-col ">
-        {productsAdded.length === 0 && (
+        {productsAdded?.length === 0 && (
           <div className="flex flex-col justify-center mx-auto my-5 ">
             {' '}
             <Image src={CartGif} alt="cart" className="w-[100px]  mx-auto  " />
@@ -71,7 +71,7 @@ export const CartMenu = ({
           </div>
         )}
 
-        {productsAdded.map((cartItem, i) => (
+        {productsAdded?.map((cartItem, i) => (
           <main key={i} className="flex p-5 ">
             <div className="flex flex-col justify-center mx-auto">
               <Image
