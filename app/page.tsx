@@ -1,6 +1,4 @@
-'use client';
 import ItemsGallery from './components/ItemsGallery';
-
 import { Slider } from './components/Slider';
 import { Balancer } from 'react-wrap-balancer';
 
