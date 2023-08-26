@@ -64,36 +64,38 @@ export default function ItemGallery() {
 
   return (
     <>
-      <main className=" flex  justify-center w-auto">
-        <Tabs defaultValue="all" className="md:flex md:flex-col hidden">
-          <TabsList className="">
-            <TabsTrigger value="all" className="md:text-xl text-sm">
-              All Categories
-            </TabsTrigger>
-            <TabsTrigger value="Mens" className="md:text-xl text-sm">
-              Mens Clothing
-            </TabsTrigger>
-            <TabsTrigger value="Womens" className="md:text-xl text-sm">
-              Womens Clothing
-            </TabsTrigger>
-            <TabsTrigger value="Shoes" className="md:text-xl text-sm">
-              Shoes
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="all">{renderProductGrid(products)}</TabsContent>
-          <TabsContent value="Mens">
-            {renderProductGrid(filteredMens)}
-          </TabsContent>
-          <TabsContent value="Womens">
-            {renderProductGrid(filteredWomens)}
-          </TabsContent>
-          <TabsContent value="Shoes">
-            {renderProductGrid(filteredShoes)}
-          </TabsContent>
-        </Tabs>
+      <main>
+        <section className=" md:flex md:justify-center md:w-auto hidden">
+          <Tabs defaultValue="all" className="md:flex md:flex-col hidden">
+            <TabsList className="">
+              <TabsTrigger value="all" className="md:text-xl text-sm">
+                All Categories
+              </TabsTrigger>
+              <TabsTrigger value="Mens" className="md:text-xl text-sm">
+                Mens Clothing
+              </TabsTrigger>
+              <TabsTrigger value="Womens" className="md:text-xl text-sm">
+                Womens Clothing
+              </TabsTrigger>
+              <TabsTrigger value="Shoes" className="md:text-xl text-sm">
+                Shoes
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="all">{renderProductGrid(products)}</TabsContent>
+            <TabsContent value="Mens">
+              {renderProductGrid(filteredMens)}
+            </TabsContent>
+            <TabsContent value="Womens">
+              {renderProductGrid(filteredWomens)}
+            </TabsContent>
+            <TabsContent value="Shoes">
+              {renderProductGrid(filteredShoes)}
+            </TabsContent>
+          </Tabs>
+        </section>
+        {/* mobile  */}
+        <section className="md:hidden">{renderProductGrid(products)}</section>
       </main>
-      {/* mobile  */}
-      <section>{renderProductGrid(products)}</section>
     </>
   );
 }
