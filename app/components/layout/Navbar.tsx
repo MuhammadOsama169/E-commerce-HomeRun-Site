@@ -130,7 +130,9 @@ export const Navbar = () => {
 
       <nav className="w-full sm:hidden flex md:justify-start justify-between items-center md:ml-5 mt-10 mx-auto md:px-10 px-5">
         <div className="flex justify-start mx-auto">
-          <Image src={logo} alt="logo" className="w-auto h-[50px]" />
+          <Link href={'/'}>
+            <Image src={logo} alt="logo" className="w-auto h-[50px]" />
+          </Link>
         </div>
 
         {/* Hamburger icon */}

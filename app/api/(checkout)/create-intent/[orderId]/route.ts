@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useSelector } from 'react-redux';
 import prisma from '../../../../lib/prisma'
 import { NextRequest, NextResponse } from "next/server";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 
 export async function POST(
   request: NextRequest,
@@ -17,7 +20,7 @@ export async function POST(
 
   if (order) {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 100 * 100,
+      amount: order.price * 100,
       currency: "usd",
       automatic_payment_methods: {
         enabled: true,
